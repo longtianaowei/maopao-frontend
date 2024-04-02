@@ -3,7 +3,7 @@
 </script>
 
 <template>
- <router-view></router-view>
+<div>队伍页</div>
 </template>
 
 <style scoped lang="less">
