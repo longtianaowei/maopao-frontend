@@ -11,7 +11,8 @@ const toRegister = () => {
 }
 const login = async () => {
   const res = await userLoginService(formModel.value)
-  console.log(res)
+  router.push('/index')
+  showSuccessToast('登录成功')
 }
 </script>
 

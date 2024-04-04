@@ -10,9 +10,10 @@ const formModel = ref({
   checkPassword: ''
 })
 
-const onSubmit = async () => {
+const onRegister = async () => {
   const res = await userRegisterService(formModel.value)
-  console.log(res)
+  router.push('/login')
+  showSuccessToast('注册成功');
 }
 
 const toLogin = () => {
@@ -28,7 +29,7 @@ const toLogin = () => {
       src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
       class="top-image"
     />
-    <van-form @submit="onSubmit">
+    <van-form @submit="onRegister">
       <van-cell-group inset>
         <van-field
           v-model="formModel.planetCode"

@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from 'vue'
+import router from '../router'
 const active = ref(0)
 const onClickLeft = () => history.back()
-const onClickRight = () => showToast('按钮')
+const onClickRight = () =>  {
+  router.push('/search')
+}
 </script>
 
 <template>

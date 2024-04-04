@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import router from '../router'
 const isDev = process.env.NODE_ENV === 'development'
 
 const myAxios = axios.create({
@@ -31,11 +31,17 @@ myAxios.interceptors.response.use(
     if (response.data.code === 0) {
       return response.data
     }
-    // // 未登录则跳转到登录页
-    // if (response.data.code === 40100) {
-    //   const redirectUrl = window.location.href
-    //   window.location.href = `/login?redirect=${redirectUrl}`
-    // }
+    // 未登录则跳转到登录页
+    if (response.data.code === 40100) {
+        router.push('/login')
+        showFailToast(response.data.message)
+    }
+
+    if (response.data.code === 40000) {
+        showFailToast(response.data.description)
+        return Promise.reject(response.data)
+    }
+    
     // 响应错误
     showFailToast(response.data.message || '服务异常')
     return Promise.reject(response.data)

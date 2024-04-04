@@ -8,6 +8,8 @@ import layout from '../layouts/BasicLayout.vue'
 import UserLoginPage from '../pages/UserLoginPage.vue'
 import UserRegisterPage  from '../pages/UserRegisterPage.vue'
 import SearchResultPage from '../pages/SearchResultPage.vue'
+import UpdateUserInfo from '../pages/UpdateUserInfo.vue'
+import UserEditPage from '../pages/UserEditPage.vue'
  
 const routes = [
   { path: '/login', component:UserLoginPage },
@@ -20,7 +22,9 @@ const routes = [
       { path: '/team', title: '找队伍', component: Team },
       { path: '/user', title: '用户中心', component: UserPage },
       { path: '/search', title: '搜索表单', component: SearchPage },
-      { path: '/search/result', title: '搜索结果', component: SearchResultPage }
+      { path: '/search/result', title: '搜索结果', component: SearchResultPage },
+      { path: '/user/update', title: '用户详细信息', component: UpdateUserInfo },
+      { path: '/user/edit', title: '用户详细信息', component: UserEditPage }
     ]
   }
 
