@@ -1,34 +1,20 @@
 <script setup>
 import { ref } from 'vue'
 import router from '../router'
-const username = ref('')
-const useraccount = ref('')
-const password = ref('')
-const repassword = ref('')
-const rules = ref({
-  username: [
-    { required: true, message: '请输入用户名' }
-  ],
-  useraccount: [
-    { required: true, message: '请输入账号' }
-  ],
-  password: [
-    { required: true, message: '请输入密码' }
-  ],
-  repassword: [
-    { required: true, message: '请再次输入密码' }
-  ]
+import { userRegisterService } from '../api/user'
+
+const formModel = ref({
+  userAccount: '',
+  planetCode: '',
+  userPassword: '',
+  checkPassword: ''
 })
 
-const register = () => {
-  // 在注册按钮点击时进行全部字段的校验
-  Form.validate(formData).then(() => {
-    // 校验通过，执行注册逻辑
-  }).catch(() => {
-    // 校验不通过，可以使用 Toast 提示用户
-    Toast('请填写正确信息')
-  })
+const onSubmit = async () => {
+  const res = await userRegisterService(formModel.value)
+  console.log(res)
 }
+
 const toLogin = () => {
   router.push('/login')
 }
@@ -42,33 +28,67 @@ const toLogin = () => {
       src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
       class="top-image"
     />
-    <van-form required="auto">
-      <van-field v-model="username" :rules="rules.username" label="昵称" placeholder="请输入昵称" />
-      <van-field v-model="useraccount" :rules="rules.useraccount" label="账号" placeholder="请输入账号" />
-      <van-field v-model="password" type="password" :rules="rules.password" label="密码" placeholder="请输入密码" />
-      <van-field v-model="repassword" type="password" :rules="rules.repassword" label="确认密码" placeholder="请输入密码" />
-      <van-button type="primary" class="login-button" block="true" @click="register">注册</van-button>
-      <p @click="toLogin">已有账号？点击登录</p>
+    <van-form @submit="onSubmit">
+      <van-cell-group inset>
+        <van-field
+          v-model="formModel.planetCode"
+          label="星球编号"
+          name="pattern"
+          placeholder="请输入星球编号"
+          :rules="[{ pattern: /^\S{1,4}$/, message: '星球编号必须是1-4位的数字' }]"
+        />
+        <van-field
+          v-model="formModel.userAccount"
+          label="账号"
+          name="pattern"
+          placeholder="请输入账号"
+          :rules="[{ pattern: /^\S{4,10}$/, message: '账号必须是4-10位的非空字符' }]"
+        />
+        <van-field
+          v-model="formModel.userPassword"
+          label="密码"
+          type="password"
+          name="pattern"
+          placeholder="请输入密码"
+          :rules="[{ pattern: /^\S{6,15}$/, message: '密码必须是6-15位的非空字符' }]"
+        />
+        <van-field
+          v-model="formModel.checkPassword"
+          label="确认密码"
+          type="password"
+          name="validator"
+          placeholder="请再次输入密码"
+          :rules="[
+            { pattern: /^\S{6,15}$/, message: '密码必须是6-15位的非空字符' },
+            {
+              validator: val => {
+                if (val !== formModel.userPassword) {
+                  return false
+                }
+              },
+              message: '两次密码不一致'
+            }
+          ]"
+        />
+      </van-cell-group>
+      <div style="margin: 16px">
+        <van-button round block type="primary" native-type="submit"> 注册 </van-button>
+      </div>
     </van-form>
+    <p @click="toLogin">已有账号？点击登录</p>
   </div>
 </template>
 
-
-
 <style scoped lang="less">
-.login-button {
-  width: 80%;
-  margin: 10px auto;
+
+.top-image {
+  display: block;
+  margin: 8rem auto 1rem;
 }
 
-.top-image{
-    display: block;
-    margin: 8rem auto 1rem;
-}
-
-p{
-   margin-left: 12rem;
-   font-size: 14px;
-   color: #969799;
+p {
+  margin-left: 12rem;
+  font-size: 14px;
+  color: #969799;
 }
 </style>

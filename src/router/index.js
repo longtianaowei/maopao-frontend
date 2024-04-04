@@ -7,6 +7,7 @@ import SearchPage from '../pages/SearchPage.vue'
 import layout from '../layouts/BasicLayout.vue'
 import UserLoginPage from '../pages/UserLoginPage.vue'
 import UserRegisterPage  from '../pages/UserRegisterPage.vue'
+import SearchResultPage from '../pages/SearchResultPage.vue'
  
 const routes = [
   { path: '/login', component:UserLoginPage },
@@ -18,7 +19,8 @@ const routes = [
       { path: '/index', component: Index },
       { path: '/team', title: '找队伍', component: Team },
       { path: '/user', title: '用户中心', component: UserPage },
-      { path: '/search', title: '用户中心', component: SearchPage }
+      { path: '/search', title: '搜索表单', component: SearchPage },
+      { path: '/search/result', title: '搜索结果', component: SearchResultPage }
     ]
   }
 

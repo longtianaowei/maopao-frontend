@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import router from '../router'
 const searchText = ref('')
 // 搜索逻辑
 const onSearch = () => {
@@ -35,6 +36,10 @@ const doClose = tag => {
   activeIds.value = activeIds.value.filter(item => {
     return item !== tag
   })
+}
+
+const search = () => {
+  router.push({ path: '/search/result', query: { tags:activeIds.value} })
 }
 const tagList = [
   {
@@ -142,7 +147,7 @@ const tagList = [
       v-model:main-active-index="activeIndex"
       :items="tagList"
     />
-    <van-button type="primary" class="search-button" block="true">搜索</van-button>
+    <van-button type="primary" class="search-button" block="true" @click="search">搜索</van-button>
   </div>
 </template>
 

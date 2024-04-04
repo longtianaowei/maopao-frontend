@@ -1,10 +1,17 @@
 <script setup>
+import { userLoginService } from '../api/user'
 import { ref } from 'vue'
 import router from '../router'
-const text = ref('')
-const password = ref('')
+const formModel = ref({
+  userAccount: '',
+  userPassword: ''
+})
 const toRegister = () => {
   router.push('/register')
+}
+const login = async () => {
+  const res = await userLoginService(formModel.value)
+  console.log(res)
 }
 </script>
 
@@ -17,13 +24,28 @@ const toRegister = () => {
       src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
       class="top-image"
     />
-    <van-cell-group inset>
-      <!-- 输入任意文本 -->
-      <van-field v-model="text" label="账号" placeholder="请输入账号" />
-      <!-- 输入密码 -->
-      <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" />
-    </van-cell-group>
-    <van-button type="primary" class="login-button" block="true">登陆</van-button>
+    <van-form @submit="login">
+      <van-cell-group inset>
+        <van-field
+          v-model="formModel.userAccount"
+          label="账号"
+          name="pattern"
+          placeholder="请输入账号"
+          :rules="[{ pattern: /^\S{4,10}$/, message: '账号必须是4-10位的非空字符' }]"
+        />
+        <van-field
+          v-model="formModel.userPassword"
+          label="密码"
+          type="password"
+          name="pattern"
+          placeholder="请输入密码"
+          :rules="[{ pattern: /^\S{6,15}$/, message: '密码必须是6-15位的非空字符' }]"
+        />
+      </van-cell-group>
+      <div style="margin: 16px">
+        <van-button round block type="primary" native-type="submit"> 登陆 </van-button>
+      </div>
+    </van-form>
     <p @click="toRegister">还没有账号？点击注册</p>
   </div>
 </template>
@@ -34,14 +56,14 @@ const toRegister = () => {
   margin: 10px auto;
 }
 
-.top-image{
-    display: block;
-    margin: 8rem auto 1rem;
+.top-image {
+  display: block;
+  margin: 8rem auto 1rem;
 }
 
-p{
-   margin-left: 12rem;
-   font-size: 14px;
-   color: #969799;
+p {
+  margin-left: 12rem;
+  font-size: 14px;
+  color: #969799;
 }
 </style>
