@@ -59,10 +59,6 @@ const onOversize = file => {
   console.log(file)
   showToast('文件大小不能超过 2MB')
 }
-// const afterRead = file => {
-//   // 此时可以自行将文件上传至服务器
-//   console.log(file)
-// }
 </script>
 <template>
   <div>
@@ -78,6 +74,12 @@ const onOversize = file => {
     />
     <van-cell title="账号" :value="user.userAccount" />
     <van-cell title="性别" is-link :value="user.gender" @click="show = true" />
+    <van-cell
+      title="我的标签"
+      is-link
+      to="/user/tags"
+      value="点击查看"
+    />
     <van-cell
       title="电话"
       is-link
@@ -101,16 +103,7 @@ const onOversize = file => {
         <van-radio name="0">女</van-radio>
       </van-radio-group>
     </van-dialog>
-
-    <!-- <van-dialog v-model:show="showAvatar" title="修改头像" show-cancel-button>
-      <van-uploader
-        preview-image="true"
-        preview-full-image="true"
-        :max-size="2048 * 1024"
-        :after-read="afterRead"
-        @oversize="onOversize"
-      />
-    </van-dialog> -->
+    <!-- 头像上传框 -->
     <van-popup v-model:show="showAvatar" round :style="{ padding: '64px' }">
         <van-uploader
         preview-image="true"

@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { userUpdateService, getCurrentUserService } from '../api/user'
-import { showSuccessToast } from 'vant';
 import router from '../router';
 
 const route = useRoute()

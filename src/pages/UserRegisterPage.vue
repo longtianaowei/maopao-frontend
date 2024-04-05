@@ -13,7 +13,7 @@ const formModel = ref({
 const onRegister = async () => {
   const res = await userRegisterService(formModel.value)
   router.push('/login')
-  showSuccessToast('注册成功');
+  showSuccessToast('注册成功')
 }
 
 const toLogin = () => {
