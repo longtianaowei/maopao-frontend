@@ -10,7 +10,6 @@ const queryObj = {
 const recommendList = ref([])
 onMounted(async () => {
   const res = await userRecommendService(queryObj)
-  // recommendList.value = res.data.records
   recommendList.value = res.data.records.map(item => {
     item.tags = JSON.parse(item.tags.replace(/\\/g, ''))
     return item
@@ -20,28 +19,8 @@ onMounted(async () => {
 
 <template>
   <div style="margin-bottom: 60px;">
-    <van-card
-      v-for="(item, index) in recommendList"
-      :key="index"
-      desc="简介: 该用户比较懒,暂时没有设置"
-      :title="item.username || '默认用户昵称'"
-      :thumb="item.avatarUrl || 'https://source.damaomao.net/imgs/logo.png'"
-    >
-      <template #tags>
-        <van-tag
-          plain
-          type="primary"
-          v-for="(tag, index) in item.tags"
-          :key="index"
-          style="margin-right: 5px"
-          >{{ tag ? tag : '该用户暂时未设置' }}</van-tag
-        >
-      </template>
-      <template #footer>
-        <van-button size="mini">联系我</van-button>
-        <van-button size="mini">按钮</van-button>
-      </template>
-    </van-card>
+    <UserCardList :userList = recommendList ></UserCardList>
+    <van-empty image="search" description="暂无用户" v-if="recommendList.length <= 0" />
   </div>
 </template>
 

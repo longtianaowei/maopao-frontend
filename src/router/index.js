@@ -11,6 +11,7 @@ import SearchResultPage from '../pages/SearchResultPage.vue'
 import UpdateUserInfo from '../pages/UpdateUserInfo.vue'
 import UserEditPage from '../pages/UserEditPage.vue'
 import UserTagsPage from '../pages/UserTagsPage.vue'
+import TeamAddPage from '../pages/TeamAddPage.vue'
 
 const routes = [
   { path: '/login', component: UserLoginPage },
@@ -27,7 +28,8 @@ const routes = [
       { path: '/search/result', title: '搜索结果', component: SearchResultPage },
       { path: '/user/update', title: '用户详细信息', component: UpdateUserInfo },
       { path: '/user/edit', title: '用户信息编辑', component: UserEditPage },
-      { path: '/user/tags', title: '用户标签编辑', component: UserTagsPage }
+      { path: '/user/tags', title: '用户标签编辑', component: UserTagsPage },
+      { path: '/team/create', title: '创建队伍', component: TeamAddPage }
     ]
   }
 ]

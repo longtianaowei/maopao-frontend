@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { userUpdateService, getCurrentUserService } from '../api/user'
-import router from '../router';
+import router from '../router'
 
 const route = useRoute()
 // 解构
@@ -38,4 +38,4 @@ const onSubmit = async () => {
   </div>
 </template>
 
-<style lang="less"></style>
+<style lang="less" scoped></style>

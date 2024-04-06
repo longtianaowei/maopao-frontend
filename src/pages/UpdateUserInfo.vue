@@ -115,3 +115,5 @@ const onOversize = file => {
     </van-popup>
   </div>
 </template>
+<style scoped>
+</style>
