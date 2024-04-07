@@ -1,19 +1,22 @@
 <script setup>
-import ref from 'vue'
+import { ref } from 'vue'
 import { teamAddService } from '../api/team'
-const initFormData = {
-  "name": "",
-  "description": "",
-  "expireTime": null,
-  "maxNum": 3,
-  "password": "",
-  "status": 0,
+const addTeamData = ref({
+  name: '',
+  description: '',
+  expireTime: null,
+  maxNum: 3,
+  password: '',
+  status: 0
+})
+
+const onConfirm = ({ selectedValues }) => {
+  addTeamData.value.expireTime = selectedValues.join('-')
+  console.log(addTeamData.value.expireTime)
+  showPicker.value = false
 }
 
-// 需要用户填写的表单数据
-const addTeamData = ref({...initFormData})
-
-const showPicker = ref(false);
+const showPicker = ref(false)
 const minDate = new Date()
 
 // 提交
@@ -32,10 +35,10 @@ const onSubmit = async () => {
       <van-cell-group inset>
         <van-field
           v-model="addTeamData.name"
-          name="name"
+          name="队伍名"
           label="队伍名"
           placeholder="请输入队伍名"
-          :rules="[{ required: true, message: '请输入队伍名' }]"
+          :rules="[{ required: true, message: '队伍名为空' }]"
         />
         <van-field
           v-model="addTeamData.description"
@@ -44,24 +47,17 @@ const onSubmit = async () => {
           label="队伍描述"
           type="textarea"
           placeholder="请输入队伍描述"
+          :rules="[{ required: true, message: '队伍描述为空' }]"
         />
         <van-field
+          v-model="addTeamData.expireTime"
           is-link
           readonly
-          name="datetimePicker"
-          label="过期时间"
+          name="datePicker"
+          label="队伍过期时间"
           :placeholder="addTeamData.expireTime || '点击选择过期时间'"
           @click="showPicker = true"
         />
-        <van-popup v-model:show="showPicker" position="bottom">
-          <van-datetime-picker
-            v-model="addTeamData.expireTime"
-            @confirm="showPicker = false"
-            type="datetime"
-            title="请选择过期时间"
-            :min-date="minDate"
-          />
-        </van-popup>
         <van-field name="stepper" label="最大人数">
           <template #input>
             <van-stepper v-model="addTeamData.maxNum" max="10" min="3" />
@@ -85,6 +81,12 @@ const onSubmit = async () => {
           placeholder="请输入队伍密码"
           :rules="[{ required: true, message: '请填写密码' }]"
         />
+        <van-popup v-model:show="showPicker" position="bottom">
+          <van-date-picker @confirm="onConfirm" title="请选择过期时间" :min-date="minDate">
+            <!-- <template #columns-top>
+          </template> -->
+          </van-date-picker>
+        </van-popup>
       </van-cell-group>
       <div style="margin: 16px">
         <van-button round block type="primary" native-type="submit"> 提交 </van-button>
