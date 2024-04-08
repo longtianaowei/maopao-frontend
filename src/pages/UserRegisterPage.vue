@@ -26,17 +26,17 @@ const toLogin = () => {
       round
       width="10rem"
       height="10rem"
-      src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
+      src="../../images/logo.png"
       class="top-image"
     />
     <van-form @submit="onRegister">
       <van-cell-group inset>
         <van-field
           v-model="formModel.planetCode"
-          label="星球编号"
+          label="编号"
           name="pattern"
-          placeholder="请输入星球编号"
-          :rules="[{ pattern: /^\S{1,4}$/, message: '星球编号必须是1-4位的数字' }]"
+          placeholder="请输入编号"
+          :rules="[{ pattern:/^\d{1,4}$/, message: '编号必须是1-4位的数字' }]"
         />
         <van-field
           v-model="formModel.userAccount"

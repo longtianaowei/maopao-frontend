@@ -26,7 +26,6 @@ myAxios.interceptors.request.use(
 // 响应拦截器
 myAxios.interceptors.response.use(
   response => {
-    console.log(response)
     // code为0正常返回数据
     if (response.data.code === 0) {
       return response.data

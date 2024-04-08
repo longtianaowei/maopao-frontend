@@ -2,12 +2,7 @@
 import { teamStatusEnum } from '../constants/team'
 import { onMounted, ref } from 'vue'
 import { getCurrentUserService } from '../api/user'
-import {
-  getTeamListService,
-  joinTeamService,
-  quitTeamService,
-  deleteTeamService
-} from '../api/team'
+import { joinTeamService, quitTeamService, deleteTeamService } from '../api/team'
 import router from '../router'
 import { defineProps } from 'vue'
 
@@ -22,7 +17,6 @@ defineProps({
     type: Array
   }
 })
-
 
 onMounted(async () => {
   const res = await getCurrentUserService()
@@ -95,7 +89,7 @@ const doDeleteTeam = async id => {
     <van-card
       v-for="(team, index) in teamList"
       :key="index"
-      thumb="https://source.damaomao.net/imgs/logo.png"
+      thumb="../../images/logo.png"
       :desc="`队伍描述:${team.description}`"
       :title="`队伍名:${team.name}`"
     >

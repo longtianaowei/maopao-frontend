@@ -22,7 +22,7 @@ const login = async () => {
       round
       width="10rem"
       height="10rem"
-      src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
+      src="../../images/logo.png"
       class="top-image"
     />
     <van-form @submit="login">
