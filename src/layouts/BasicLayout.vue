@@ -9,7 +9,8 @@ const onClickRight = () =>  {
 </script>
 
 <template>
-  <!-- 顶部navbar -->
+  <div class="laybox">
+    <!-- 顶部navbar -->
   <van-nav-bar
     title="标题"
     left-text="返回"
@@ -28,6 +29,9 @@ const onClickRight = () =>  {
     <van-tabbar-item replace to="/team" icon="friends-o">队伍</van-tabbar-item>
     <van-tabbar-item replace to="/user" icon="contact-o">我的</van-tabbar-item>
   </van-tabbar>
+  </div>
 </template>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+
+</style>

@@ -41,6 +41,10 @@ myAxios.interceptors.response.use(
         showFailToast(response.data.description)
         return Promise.reject(response.data)
     }
+    if(response.data.code === 50000) {
+      showFailToast('暂无搜索结果')
+      return response.data
+    }
     
     // 响应错误
     showFailToast(response.data.message || '服务异常')

@@ -12,7 +12,6 @@ const addTeamData = ref({
 
 const onConfirm = ({ selectedValues }) => {
   addTeamData.value.expireTime = selectedValues.join('-')
-  console.log(addTeamData.value.expireTime)
   showPicker.value = false
 }
 
@@ -23,10 +22,8 @@ const minDate = new Date()
 const onSubmit = async () => {
   const postData = {
     ...addTeamData.value,
-    status: addTeamData.value.status
   }
   const res = await teamAddService(postData)
-  console.log(res)
 }
 </script>
 <template>
