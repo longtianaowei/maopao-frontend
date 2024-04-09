@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { getCurrentUserService, userLoginoutService } from '../api/user'
-import {formatTime} from '../utils/format'
+import { formatTime } from '../utils/format'
 import router from '../router'
 const user = ref([])
 onMounted(async () => {
@@ -12,7 +12,9 @@ onMounted(async () => {
   user.value = res.data
 })
 const loginout = async () => {
-  const res = userLoginoutService()
+  // 删除存储在 cookie 中的会话信息
+  document.cookie = 'SESSION=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+  showSuccessToast('退出登陆成功')
   router.push('/login')
 }
 </script>

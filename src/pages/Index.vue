@@ -10,8 +10,10 @@ const queryObj = {
 const recommendList = ref([])
 onMounted(async () => {
   const res = await userRecommendService(queryObj)
+  console.log(res)
+  // recommendList.value  = res.data.records
   recommendList.value = res.data.records.map(item => {
-    item.tags = JSON.parse(item.tags.replace(/\\/g, ''))
+    item.tags = JSON.parse(item.tags)
     return item
   })
 })

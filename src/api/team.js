@@ -21,3 +21,4 @@ export const getMyCreateTeamList = ({searchText= ''}) => axios.get('/team/list/m
 
 export const getMyJoinTeamList = ({searchText= ''}) => axios.get('/team/list/my/join',{params:{searchText}})
 
+export const getMyTeamList = (userId) => axios.get('/team/list',{params:{userId}})

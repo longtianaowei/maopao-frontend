@@ -26,6 +26,7 @@ myAxios.interceptors.request.use(
 // 响应拦截器
 myAxios.interceptors.response.use(
   response => {
+    console.log(response)
     // code为0正常返回数据
     if (response.data.code === 0) {
       return response.data
@@ -41,7 +42,8 @@ myAxios.interceptors.response.use(
         return Promise.reject(response.data)
     }
     if(response.data.code === 50000) {
-      return response.data
+      showFailToast('暂无数据')
+      return Promise.reject(response.data)
     }
     
     // 响应错误

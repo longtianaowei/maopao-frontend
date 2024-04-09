@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { getTeamById,updateTeamService } from '../api/team'
 import { useRoute } from 'vue-router'
+import {formatTime} from '../utils/format'
 const route = useRoute()
 // 解构
 const { id } = route.query
@@ -24,7 +25,6 @@ const minDate = new Date()
 const onSubmit = async () => {
   const res = await updateTeamService(updateTeamData.value)
 }
-import {formatTime} from '../utils/format'
 </script>
 <template>
   <div>
@@ -64,7 +64,6 @@ import {formatTime} from '../utils/format'
           <template #input>
             <van-radio-group v-model="updateTeamData.status" direction="horizontal">
               <van-radio name="0">公开</van-radio>
-              <van-radio name="1">私有</van-radio>
               <van-radio name="2">加密</van-radio>
             </van-radio-group>
           </template>

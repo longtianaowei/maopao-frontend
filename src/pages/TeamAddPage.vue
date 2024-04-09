@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { teamAddService } from '../api/team'
+import router from '../router';
 const addTeamData = ref({
   name: '',
   description: '',
@@ -24,6 +25,8 @@ const onSubmit = async () => {
     ...addTeamData.value,
   }
   const res = await teamAddService(postData)
+  showSuccessToast('创建成功')
+  router.push('/team')
 }
 </script>
 <template>
@@ -64,7 +67,6 @@ const onSubmit = async () => {
           <template #input>
             <van-radio-group v-model="addTeamData.status" direction="horizontal">
               <van-radio name="0">公开</van-radio>
-              <van-radio name="1">私有</van-radio>
               <van-radio name="2">加密</van-radio>
             </van-radio-group>
           </template>

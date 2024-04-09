@@ -1,16 +1,30 @@
 <script setup>
 import TeamCardList from '../components/TeamCardList.vue'
-import { getTeamListService } from '../api/team'
+import { getTeamListService ,getMyTeamList} from '../api/team'
+import {getCurrentUserService} from '../api/user'
 import { onMounted, ref } from 'vue'
 import router from '../router'
 const teamList = ref([])
 const searchObj = ref({
   status: 0,
   searchText: ''
+
 })
+const userId = ref()
+const currentUser = ref()
 onMounted(() => {
   getTeamList()
+  getUserId()
 })
+
+const getUserId = async () => {
+  const res = await getCurrentUserService()
+  userId.value = res.data.id
+}
+const getMyTeam =async () => {
+  const res = await getTeamListService(userId.value)
+  teamList.value = res.data
+}
 
 const getTeamList = async () => {
   const res = await getTeamListService(searchObj.value)
@@ -31,8 +45,7 @@ const onTabChange = name => {
     getTeamList()
   }
   if (name == 'private') {
-    searchObj.value.status = 1
-    getTeamList()
+    getMyTeam()
   }
 }
 const toAddTeam = () => {
@@ -55,7 +68,7 @@ const toAddTeam = () => {
     <van-tabs v-model:active="active" @change="onTabChange">
       <van-tab title="公开" name="public" />
       <van-tab title="加密" name="password" />
-      <van-tab title="私有" name="private" />
+      <van-tab title="我的" name="private" />
     </van-tabs>
     <TeamCardList :teamList="teamList"></TeamCardList>
     <van-empty image="search" description="暂无数据" v-if="teamList==null || teamList.length <= 0" />
