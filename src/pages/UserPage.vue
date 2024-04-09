@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { getCurrentUserService, userLoginoutService } from '../api/user'
+import {formatTime} from '../utils/format'
 import router from '../router'
 const user = ref([])
 onMounted(async () => {
@@ -23,7 +24,7 @@ const loginout = async () => {
     <van-cell title="修改个人信息" is-link to="/user/update" />
     <van-cell title="我创建的队伍" is-link to="/user/team/create" />
     <van-cell title="我加入的队伍" is-link to="/user/team/join" />
-    <van-cell title="注册时间" :value="user.createTime" />
+    <van-cell title="注册时间" :value="formatTime(user.createTime)" />
     <van-button type="primary" class="loginout-button" @click="loginout">退出登录</van-button>
   </div>
 </template>

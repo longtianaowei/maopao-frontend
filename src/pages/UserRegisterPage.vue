@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import router from '../router'
 import { userRegisterService } from '../api/user'
-
+import logo from '../assets/logo.png'
 const formModel = ref({
   userAccount: '',
   planetCode: '',
@@ -22,13 +22,7 @@ const toLogin = () => {
 </script>
 <template>
   <div>
-    <van-image
-      round
-      width="10rem"
-      height="10rem"
-      src="../../images/logo.png"
-      class="top-image"
-    />
+    <van-image round width="10rem" height="10rem" :src="logo" class="top-image" />
     <van-form @submit="onRegister">
       <van-cell-group inset>
         <van-field
@@ -36,7 +30,7 @@ const toLogin = () => {
           label="编号"
           name="pattern"
           placeholder="请输入编号"
-          :rules="[{ pattern:/^\d{1,4}$/, message: '编号必须是1-4位的数字' }]"
+          :rules="[{ pattern: /^\d{1,4}$/, message: '编号必须是1-4位的数字' }]"
         />
         <van-field
           v-model="formModel.userAccount"
@@ -81,7 +75,6 @@ const toLogin = () => {
 </template>
 
 <style scoped lang="less">
-
 .top-image {
   display: block;
   margin: 8rem auto 1rem;

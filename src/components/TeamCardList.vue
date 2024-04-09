@@ -4,7 +4,9 @@ import { onMounted, ref } from 'vue'
 import { getCurrentUserService } from '../api/user'
 import { joinTeamService, quitTeamService, deleteTeamService } from '../api/team'
 import router from '../router'
-import { defineProps } from 'vue'
+import {formatTime} from '../utils/format'
+import logo from '../assets/logo.png'
+
 
 const showPasswordDialog = ref(false)
 const password = ref('')
@@ -89,7 +91,7 @@ const doDeleteTeam = async id => {
     <van-card
       v-for="(team, index) in teamList"
       :key="index"
-      thumb="../../images/logo.png"
+      :thumb="logo"
       :desc="`队伍描述:${team.description}`"
       :title="`队伍名:${team.name}`"
     >
@@ -103,10 +105,10 @@ const doDeleteTeam = async id => {
           {{ `队伍人数: ${team.hasJoinNum}/${team.maxNum}` }}
         </div>
         <div v-if="team.expireTime">
-          {{ '过期时间: ' + team.expireTime }}
+          {{ '过期时间: ' + formatTime(team.expireTime) }}
         </div>
         <div>
-          {{ '创建时间: ' + team.createTime }}
+          {{ '创建时间: ' +formatTime(team.createTime) }}
         </div>
       </template>
       <template #footer>

@@ -24,6 +24,7 @@ const minDate = new Date()
 const onSubmit = async () => {
   const res = await updateTeamService(updateTeamData.value)
 }
+import {formatTime} from '../utils/format'
 </script>
 <template>
   <div>
@@ -51,7 +52,7 @@ const onSubmit = async () => {
           readonly
           name="datePicker"
           label="队伍过期时间"
-          :placeholder="updateTeamData.expireTime || '点击选择过期时间'"
+          :placeholder="formatTime(updateTeamData.expireTime)|| '点击选择过期时间'"
           @click="showPicker = true"
         />
         <van-field name="stepper" label="最大人数">

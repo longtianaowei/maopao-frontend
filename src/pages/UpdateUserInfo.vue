@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { getCurrentUserService, userUpdateService, userUpdateAvatar } from '../api/user'
 import router from '../router'
+import {formatTime} from '../utils/format'
 const user = ref([])
 onMounted(() => {
   getUserInfo()
@@ -95,7 +96,7 @@ const onOversize = file => {
       @click="toEdit('email', '邮箱', user.email)"
     />
     <van-cell title="编号" :value="user.planetCode" />
-    <van-cell title="注册时间" :value="user.createTime" />
+    <van-cell title="注册时间" :value="formatTime(user.createTime)" />
     <!-- 性别修改弹出框 -->
     <van-dialog v-model:show="show" title="性别" show-cancel-button @confirm="updateGender">
       <van-radio-group v-model="checked" direction="horizontal" style="margin: 10px 30%">

@@ -4,7 +4,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 const myAxios = axios.create({
   // 基地址
-  baseURL: isDev ? 'http://localhost:8081/api' : '线上地址',
+  baseURL: isDev ? 'http://localhost:8081/api' : '线上环境',
   // 请求超时时间
   timeout: 100000
 })
@@ -41,7 +41,6 @@ myAxios.interceptors.response.use(
         return Promise.reject(response.data)
     }
     if(response.data.code === 50000) {
-      showFailToast('暂无搜索结果')
       return response.data
     }
     

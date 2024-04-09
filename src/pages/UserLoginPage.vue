@@ -2,6 +2,7 @@
 import { userLoginService } from '../api/user'
 import { ref } from 'vue'
 import router from '../router'
+import logo from '../assets/logo.png'
 const formModel = ref({
   userAccount: '',
   userPassword: ''
@@ -22,7 +23,7 @@ const login = async () => {
       round
       width="10rem"
       height="10rem"
-      src="../../images/logo.png"
+      :src="logo"
       class="top-image"
     />
     <van-form @submit="login">

@@ -1,4 +1,5 @@
 <script setup>
+import logo from '../assets/logo.png'
 defineProps({
     userList: {
     required: true,
@@ -13,7 +14,7 @@ defineProps({
       :key="index"
       desc="简介: 该用户比较懒,暂时没有设置"
       :title="item.username || '默认用户昵称'"
-      :thumb="item.avatarUrl || '../../images/logo.png'"
+      :thumb="item.avatarUrl || logo"
     >
       <template #tags>
         <van-tag
